@@ -1,0 +1,8 @@
+{% extends 'Gallery/base.html' %}
+{% load i18n %}
+{% block content %}
+  <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 60vh; text-align: center; font-family: sans-serif; padding: 20px;">
+    <h2 style="font-size: 2rem; margin-bottom: 16px;">{% trans "Thanks for the message," %} {{ name }}!</h2>
+    <p style="font-size: 1.2rem; color: #555;">{% trans "I will contact you if necessary." %}</p>
+  </div>
+{% endblock %}
