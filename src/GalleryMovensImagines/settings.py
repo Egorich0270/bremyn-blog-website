@@ -113,7 +113,8 @@ USE_L10N = True
 USE_TZ = True
 
 LOCALE_PATHS = [
-    BASE_DIR / 'locale',  # путь для хранения переводов
+    BASE_DIR / 'src' / 'locale',
+    BASE_DIR / 'locale',
 ]
 
 LANGUAGES = [
