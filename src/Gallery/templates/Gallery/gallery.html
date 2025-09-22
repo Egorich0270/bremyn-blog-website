@@ -1,0 +1,109 @@
+{% extends 'Gallery/base.html' %}
+{% load i18n %}
+{% block content %}
+  {% get_current_language as LANGUAGE_CODE %}
+  {% for card in cards %}
+    <a href="{% url 'card_detail' card.pk %}" class="card-link">
+<div class="card">
+  <div class="flex-item-left">
+    <a href="{% url 'card_detail' card.pk %}">
+      {% if card.content_type == 'image' %}
+        <img class="card-image" src="{{ card.preview.url }}" alt="Card preview">
+      {% elif card.content_type == 'video' %}
+        <video class="card-video" loop muted>
+          <source src="{{ card.preview.url }}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      {% endif %}
+    </a>
+  </div>
+  <div class="flex-item-right">
+    <div class="card-content">
+      <h3>
+        <a href="{% url 'card_detail' card.pk %}" class="card-link">
+          {% if LANGUAGE_CODE == 'en' %}
+            {{ card.title }}
+          {% else %}
+            {{ card.title_ru }}
+          {% endif %}
+        </a>
+      </h3>
+      <p>
+        {% if LANGUAGE_CODE == 'en' %}
+          {{ card.description }}
+        {% else %}
+          {{ card.description_ru }}
+        {% endif %}
+      </p>
+      <div class="card-tags">
+        {% for tag in card.tags.all %}
+          <a href="{% url 'gallery' %}?tag={{ tag.name|urlencode }}" class="tag {% if tag.name == selected_tag %}active{% endif %}">{{ tag.name }}</a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+      </a>
+  {% endfor %}
+<div class="pagination">
+  {% if cards.has_previous %}
+    <a href="?page=1" title="{% trans 'First page' %}">
+      <!-- « -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 28 10 16 20 4" />
+        <polyline points="28 28 18 16 28 4" />
+      </svg>
+    </a>
+    <a href="?page={{ cards.previous_page_number }}" title="{% trans 'Previous page' %}">
+      <!-- ‹ -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="24 28 12 16 24 4" />
+      </svg>
+    </a>
+  {% endif %}
+
+  <span class="current">
+   {% trans "Page" %} {{ cards.number }} {% trans "of" %} {{ cards.paginator.num_pages }}
+  </span>
+
+  {% if cards.has_next %}
+    <a href="?page={{ cards.next_page_number }}" title="{% trans 'Next page' %}">
+      <!-- › -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="8 28 20 16 8 4" />
+      </svg>
+    </a>
+    <a href="?page={{ cards.paginator.num_pages }}" title="{% trans 'Last page' %}">
+      <!-- » -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="4 28 14 16 4 4" />
+        <polyline points="12 28 22 16 12 4" />
+      </svg>
+    </a>
+  {% endif %}
+</div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const videos = document.querySelectorAll('.card-video');
+
+      // Создание наблюдателя для видимости видео
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.play();  // Начинаем воспроизведение видео
+          } else {
+            entry.target.pause(); // Ставим на паузу, когда видео не в области видимости
+          }
+        });
+      }, {
+        threshold: 0.5  // Запуск воспроизведения, когда видео хотя бы на 50% видно
+      });
+
+      // Наблюдаем за всеми видео на странице
+      videos.forEach(video => {
+        observer.observe(video);
+      });
+    });
+  </script>
+{% endblock %}

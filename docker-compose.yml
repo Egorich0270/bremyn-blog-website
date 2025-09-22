@@ -1,0 +1,34 @@
+version: "3.10"
+services:
+  db:
+    image: postgres:16
+    container_name: my_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: gallerydb
+      POSTGRES_USER: galleryuser
+      POSTGRES_PASSWORD: supersecret
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  web:
+    build: .
+    container_name: my_django
+    restart: always
+    volumes:
+      - .:/app
+    environment:
+      DB_NAME: gallerydb
+      DB_USER: galleryuser
+      DB_PASSWORD: supersecret
+      DB_HOST: db
+      DB_PORT: 5432
+    ports:
+      - "80:8000"
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:

@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Галерея{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'Gallery/css/styles.css' %}" />
+</head>
+<body>
+  <div class="page">
+    {% include 'Gallery/partials/header.html' %}
+
+    <div class="card-holder">
+      {% block content %}{% endblock %}
+    </div>
+
+    {% include 'Gallery/partials/footer.html' %}
+  </div>
+</body>
+</html>

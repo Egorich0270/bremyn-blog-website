@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СУПЕР МЕГА САЙТ (Крутой)</title>
+    <link rel="stylesheet" href="{% static 'Gallery/css/test.css' %}">
+</head>
+<body>
+
+<div class="container">
+    <!-- Первая колонка -->
+    <div class="column column-first">
+        <!-- Строка с canvas -->
+        <div class="canvas-box">
+            <canvas id="canvas"></canvas> <!-- Задали фиксированный размер -->
+        </div>
+        <!-- Строка с текстом -->
+        <div class="text-box">
+            Здесь можно добавить текст.
+        </div>
+    </div>
+
+    <!-- Вторая колонка -->
+    <div class="column input-box">
+        <textarea id="myTextarea" spellcheck="false"> precision mediump float;
+
+uniform float u_time;  // Добавляем униформу для времени
+uniform vec2 u_resolution;
+void main() {
+    vec2 st = gl_FragCoord.xy / u_resolution;
+    // Пример использования времени: изменяем цвет в зависимости от времени
+    gl_FragColor = vec4(st.x, st.x, st.x, 1.0);
+}</textarea>
+    </div>
+</div>
+<script src="{% static 'Gallery/js/test.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+/* Общие сбросы */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  overflow-y: scroll;
+}
+html, body {
+  height: 100%;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Главный контейнер */
+.page {
+  flex: 1; /* Расширяется на всё свободное пространство */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Контент */
+.card-holder {
+  width: 100%;
+  max-width: 1400px;
+  flex-grow: 1;
+  padding: 20px 40px 40px;
+  margin: 0 auto;
+}
+
+/* Карточка */
+.card {
+  display: flex;
+  width: 100%;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0.07, 0.07, 0.07, 0.3);
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.card .flex-item-left {
+  width: 50%;
+  background-color: #f1f1f1;
+}
+
+.card .flex-item-right {
+  width: 50%;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.card .card-content h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.card .card-content p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.card-image,
+.card-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.card-link {
+  color: inherit; /* Наследует цвет родительского текста */
+  text-decoration: none; /* Убирает подчеркивание */
+}
+
+.card-link:hover {
+  color: inherit;
+  text-decoration: none; /* Или оставить без */
+}
+
+/* Пагинация */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.pagination a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background: transparent;
+}
+
+.pagination svg {
+  width: 32px;
+  height: 32px;
+  stroke: black;
+  transition: transform 0.2s;
+}
+
+.pagination a:hover svg {
+  transform: scale(1.15);
+}
+
+.pagination .current {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: black;
+}
+
+.card-tags a.tag {
+  display: inline-block;
+  background-color: #f1f1f1;
+  color: #333;
+  padding: 4px 10px;
+  margin: 0 5px 5px 0;
+  border-radius: 12px;
+  font-size: 13px;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.card-tags a.tag:hover {
+  background-color: #dcdcdc;
+  color: black;
+}
+
+.card-tags a.tag.active {
+  background-color: #333;
+  color: white;
+}
+/* Адаптив */
+@media (max-width: 800px) {
+  .card {
+    flex-direction: column;
+  }
+
+  .card .flex-item-left,
+  .card .flex-item-right {
+    width: 100%;
+  }
+
+  .card-holder {
+    padding: 20px 20px 90px;
+  }
+
+}
