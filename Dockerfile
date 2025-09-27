@@ -14,5 +14,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . /app
 
-
-CMD ["python", "src/manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["sh", "-c", "python src/manage.py collectstatic --noinput && python src/manage.py runserver 0.0.0.0:8000"]
