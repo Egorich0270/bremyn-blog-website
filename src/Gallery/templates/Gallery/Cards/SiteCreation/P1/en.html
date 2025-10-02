@@ -1,0 +1,145 @@
+{% extends 'Gallery/base.html' %}
+
+{% block content %}
+<head>
+    <style>
+        .post-container {
+            font-family: "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            background-color: #ffffff;
+            color: #222222;
+        }
+        .post-container h1,
+        .post-container h2,
+        .post-container h3 {
+            font-weight: 600;
+            color: #111111;
+        }
+        .post-container h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 0.3rem;
+            margin-bottom: 1rem;
+        }
+        .post-container h2 {
+            margin-top: 2rem;
+            border-left: 4px solid #444444;
+            padding-left: 0.5rem;
+        }
+        .post-container p {
+            margin: 1rem 0;
+        }
+        .post-container ul {
+            margin: 0.5rem 0 1.5rem 1.5rem;
+        }
+        .post-container code {
+            background: #191919;
+            color: #ffffff;
+            padding: 0.1rem 0.1rem;
+            border-radius: 5px;
+            font-size: 0.95em;
+            font-family: "Fira Code", Consolas, monospace;
+        }
+        .post-container a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .post-container a:hover {
+            text-decoration: underline;
+        }
+        .post-footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #ddd;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="post-container">
+        <h1>Building This Website</h1>
+
+        <h2>Quick Overview</h2>
+        <p>
+            I built this site with <strong>Django</strong>. The main feature is a simple blog,
+            and it also supports localization. The idea was both to practice my skills
+            and to have a place to share some info about myself.
+        </p>
+        <p>
+            The database runs on <strong>PostgreSQL</strong>. I handled everything on my own:
+            design, development, and deployment. Requests go through <strong>nginx</strong>,
+            served by <strong>gunicorn</strong>. The site runs on <strong>HTTPS</strong>
+            with a free certificate from <strong>Let’s Encrypt</strong>.
+            The whole project is packed into Docker Compose and starts with a single command.
+            It’s hosted on my personal server, with my own domain.
+        </p>
+        <p>
+            I also set up a small CI/CD pipeline: whenever I push to <code>main</code>,
+            the server automatically updates files and restarts the containers.
+        </p>
+
+        <h2>Story</h2>
+        <p>
+            This is my first Django project that actually made it to a real release.
+            I had tried Django before, but my projects always stayed unfinished.
+            I experimented with an async server, websockets, a small chat,
+            and even a tiny game. But this blog is the one I finally brought online.
+        </p>
+        <p>
+            Why “part 1”? Well, I do plan to keep working on it.
+            It’s both fun and potentially useful. But plans don’t always turn into reality.
+        </p>
+        <p>
+            I actually wrote the site about half a year ago,
+            but only deployed it recently — first I had exams,
+            then I went home to relax, and other stuff kept getting in the way.
+        </p>
+
+        <h2>A Bit About the Process</h2>
+        <p>
+            Development itself wasn’t too hard — Django turned out to be a solid and
+            well-designed framework. Deployment though, that’s where the challenges came in.
+        </p>
+        <p>
+            First, I needed a server. I didn’t want to use my main PC,
+            so I decided to go with a <strong>Raspberry Pi</strong>.
+            That came with its own issues: I needed a case (so I 3D-printed one),
+            and later found out I’d placed it in a bad spot — right next to my desktop PC
+            and a radiator, so it was overheating. I had to add a fan.
+            Big thanks to my dad for helping with electronics advice.
+        </p>
+        <p>
+            With the server ready, I hit another problem: my router
+            <strong>Xiaomi Mi Router 4C</strong> blocks port 80,
+            and you can’t disable it. The only solution (short of buying a new router)
+            was flashing OpenWRT
+            (<a href="https://openwrt.org/ru/toh/xiaomi/xiaomi_mi_router_4c" target="_blank">link</a>).
+            Took me a while to build up the courage, but in the end it was pretty simple.
+            I needed port 80 for Let’s Encrypt and HTTPS to work properly.
+        </p>
+        <p>
+            After that, it still took me about a week to finish setting things up
+            in my free time: wrapping everything in Docker, configuring nginx,
+            and polishing the environment. And now here we are — you’re reading this post.
+        </p>
+
+        <h2>What’s Next?</h2>
+        <ul>
+            <li>a feature to preview and edit shaders;</li>
+            <li>email notifications when someone fills out a form;</li>
+            <li>a subscription system for updates;</li>
+            <li>and maybe more, who knows.</li>
+        </ul>
+
+        <div class="post-footer">
+            <p>Take care ^\(0_0)/^</p>
+        </div>
+    </div>
+</body>
+</html>
+
+{% endblock %}
