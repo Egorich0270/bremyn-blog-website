@@ -23,7 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'fallback_key')
 
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', True)
+
 ALLOWED_HOSTS = ['bremyn.blog', 'www.bremyn.blog', '188.134.72.232', '127.0.0.1']
 CSRF_TRUSTED_ORIGINS = [
     "https://bremyn.blog",
