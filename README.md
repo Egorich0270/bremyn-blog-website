@@ -34,6 +34,7 @@ DJANGO_SECRET_KEY=секретный_ключ
 POSTGRES_DB=gallerydb
 POSTGRES_USER=galleryuser
 POSTGRES_PASSWORD=пароль
+DEBUG=False
 ```
 
 3. Запустить проект:
